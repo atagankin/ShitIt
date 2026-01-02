@@ -1,0 +1,39 @@
+@startuml
+title Последовательность статусов посылок
+
+state "NEW" as new
+state "PACKED" as packed
+state "BOXED" as boxed
+state "DELIVERED" as delivered
+
+new --> packed : Parcel.packageItem()
+packed --> boxed : ParcelBox.addParcel()
+boxed --> delivered : Parcel.deliver()
+
+note right of new
+  **Создание посылки:**
+  - StandardParcel()
+  - FragileParcel()
+  - PerishableParcel()
+end note
+
+note right of packed
+  **Упаковка:**
+  - DeliveryApp.sendParcels()
+  - Stream фильтрация по NEW
+end note
+
+note right of boxed
+  **Распределение:**
+  - ParcelBox.addParcel()
+  - Тип коробки зависит от
+    класса посылки
+end note
+
+note right of delivered
+  **Доставка:**
+  - ParcelBox.sendBox()
+  - Коробка очищается
+end note
+
+@enduml

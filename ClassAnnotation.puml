@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Parcel {
+    String description
+    int weight
+    String deliveryAddress
+    int sendDay
+
+    void packageItem()
+    void deliver()
+    double calculateDeliveryCost()
+}
+
+class StandardParcel{
+}
+
+class FragileParcel {
+}
+
+class PerishableParcel {
+    int timeToLive
+
+    boolean isExpired(currentDay)
+}
+
+class ParcelBox<T extends Parcel> {
+    List<T> parcelBox
+
+    void addParcel()
+    List<T> getAllParcels()
+}
+
+interface Trackable {
+    void reportStatus(String newLocation)
+}
+
+
+@enduml
