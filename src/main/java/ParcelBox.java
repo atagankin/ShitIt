@@ -18,7 +18,7 @@ public class ParcelBox<T extends Parcel> {
         }
 
         if ((currentWeight + parcel.getWeight()) > maxWeight) {
-            System.out.printf("Превышение максимального веса коробки %d. Текущий вес %d, доступный остаток: %d",
+            System.out.printf("Превышение максимального веса коробки %d. Текущий вес %d, доступный остаток: %d\n",
                     this.boxNum,
                     this.currentWeight,
                     (this.maxWeight - this.currentWeight)
