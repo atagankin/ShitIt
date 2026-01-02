@@ -61,6 +61,7 @@ public class DeliveryApp {
 
         if (!(parcelType == 1 || parcelType == 2 || parcelType ==3)) {
             System.out.println("Введен неверный тип посылки.");
+            return;
         }
 
         // Проверяем, что посылки с таким описанием не существует, иначе выдаем ошибку
@@ -69,20 +70,20 @@ public class DeliveryApp {
 
         while (needUniqueDescription) {
             System.out.println("Введите описание посылки");
-            String inputDscription = scanner.nextLine();
+            String inputDescription = scanner.nextLine();
 
-            if (inputDscription.isEmpty()) {
+            if (inputDescription.isEmpty()) {
                 System.out.println("Описание не может быть пустым");
                 continue;
             }
 
             boolean isDescriptionExists = allParcels.stream()
-                    .anyMatch(p -> p.getDescription().equals(inputDscription));
+                    .anyMatch(p -> p.getDescription().equals(inputDescription));
 
             if (isDescriptionExists) {
                 System.out.println("Посылка с таким описанием уже существует.");
             } else {
-                description = inputDscription;
+                description = inputDescription;
                 needUniqueDescription = false;
             }
         }
@@ -92,12 +93,21 @@ public class DeliveryApp {
         scanner.nextLine();
         System.out.println();
 
+        if (weight <= 0) {
+            System.out.println("Вес посылки должен быть положительным числом.");
+            return;
+        }
+
         System.out.println("Введите адрес доставки:");
         String deliveryAddress = scanner.nextLine();
 
         System.out.print("Введите дату отправки: ");
         int sendDay = scanner.nextInt();
         scanner.nextLine();
+        if (sendDay <= 0 || sendDay > 31) {
+            System.out.println("Дата должна быть в промежутке от 1 до 31");
+            return;
+        }
 
         switch (parcelType) {
             case 1:

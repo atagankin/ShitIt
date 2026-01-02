@@ -12,9 +12,8 @@ public class FragileParcel extends Parcel implements Trackable {
 
     @Override
     public void packageItem() {
-        this.keyState = ParcelStatus.PACKED;
         System.out.printf("Посылка %s обёрнута в защитную плёнку\n", this.description);
-        System.out.printf("Посылка %s упакована\n", this.description);
+        super.packageItem();
     }
 
     @Override
